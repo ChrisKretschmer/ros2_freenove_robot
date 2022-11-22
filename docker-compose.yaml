@@ -1,0 +1,9 @@
+services:
+    ros:
+        build: ./ros/robot_ws
+        restart: always
+        privileged: true
+    webfrontend:
+        image: ghcr.io/foxglove/studio:latest
+        ports:
+            - "8080:8080"
