@@ -6,6 +6,14 @@ services:
         ports:
             - "9090:9090/udp"
             - "9090:9090/tcp"
+        deploy:
+            resources:
+                limits:
+                    cpus: "1"
+                    memory: "4096M"
+                reservations:
+                    cpus: "0.5"
+                    memory: "1024M"
 
     webfrontend:
         image: ghcr.io/foxglove/studio:latest

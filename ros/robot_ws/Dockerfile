@@ -3,12 +3,15 @@ FROM ros:humble
 # install ros package
 RUN apt-get update && apt-get install -y \
       ros-${ROS_DISTRO}-rosbridge-suite \
-      ros-${ROS_DISTRO}-v4l2-camera && \
+      ros-${ROS_DISTRO}-v4l2-camera \
+      python-pip && \
     rm -rf /var/lib/apt/lists/*
 
 
 RUN mkdir -p /robot_ws/src
 COPY ./src /robot_ws/src
+
+RUN pip install RPi.GPIO
 
 RUN . /opt/ros/${ROS_DISTRO}/setup.sh && \
     cd /robot_ws && \

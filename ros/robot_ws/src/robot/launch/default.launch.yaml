@@ -4,6 +4,12 @@ launch:
     file: "$(find-pkg-share rosbridge_server)/launch/rosbridge_websocket_launch.xml"
 
 - node:
+    pkg: "robot"
+    exec: "ultrasonic"
+    name: "ultrasonic"
+    namespace: "ultrasonic"
+
+- node:
     pkg: "v4l2_camera"
     exec: "v4l2_camera_node"
     name: "camera"
