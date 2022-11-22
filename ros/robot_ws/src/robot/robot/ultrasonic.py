@@ -3,13 +3,13 @@ import RPi.GPIO as GPIO
 import rclpy
 from rclpy.node import Node
 
-from std_msgs.msg import Number
+from sensor_msgs.msg import Range
 
 class Ultrasonic(Node):
   def __init__(self):
     super().__init__('ultrasonic')
-    self.publisher_ = self.create_publisher(String, 'topic', 10)
-    timer_period = 0.5  # seconds
+    self.publisher_ = self.create_publisher(Range, 'ultrasonic', 10)
+    timer_period = 1  # seconds
     self.timer = self.create_timer(timer_period, self.timer_callback)
     
     GPIO.setwarnings(False)
@@ -20,8 +20,10 @@ class Ultrasonic(Node):
     GPIO.setup(self.echo_pin,GPIO.IN)
     
   def timer_callback(self):
-    msg = Number()
-    msg.data = self.get_distance()
+    msg = Range()
+    msg.radiation_type = 0
+    msg.range = float(self.get_distance())
+    self.get_logger().info("sent " + str(msg.range))
     self.publisher_.publish(msg)
 
   def send_trigger_pulse(self):
@@ -35,17 +37,16 @@ class Ultrasonic(Node):
       count = count-1
     
   def get_distance(self):
-    distance_cm=[0,0,0,0,0]
-    for i in range(3):
+    distance_cm = 0
+    while distance_cm < 1:
       self.send_trigger_pulse()
       self.wait_for_echo(True,10000)
       start = time.time()
       self.wait_for_echo(False,10000)
       finish = time.time()
       pulse_len = finish-start
-      distance_cm[i] = pulse_len/0.000058
-    distance_cm=sorted(distance_cm)
-    return int(distance_cm[2])
+      distance_cm = pulse_len/0.000058
+    return float(distance_cm)
   
 
 def main(args=None):
