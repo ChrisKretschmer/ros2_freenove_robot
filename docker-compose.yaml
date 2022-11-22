@@ -3,6 +3,10 @@ services:
         build: ./ros/robot_ws
         restart: always
         privileged: true
+        ports:
+            - "9090:9090/udp"
+            - "9090:9090/tcp"
+
     webfrontend:
         image: ghcr.io/foxglove/studio:latest
         ports:
