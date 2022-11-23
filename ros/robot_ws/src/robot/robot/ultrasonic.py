@@ -23,7 +23,7 @@ class Ultrasonic(Node):
     msg = Range()
     msg.radiation_type = 0
     msg.range = float(self.get_distance())
-    self.get_logger().info("sent " + str(msg.range))
+    #self.get_logger().info("sent " + str(msg.range))
     self.publisher_.publish(msg)
 
   def send_trigger_pulse(self):
@@ -38,7 +38,7 @@ class Ultrasonic(Node):
     
   def get_distance(self):
     distance_cm = 0
-    while distance_cm < 1:
+    while distance_cm < 1 or distance_cm > 1500:
       self.send_trigger_pulse()
       self.wait_for_echo(True,10000)
       start = time.time()

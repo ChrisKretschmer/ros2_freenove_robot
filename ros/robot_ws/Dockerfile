@@ -7,11 +7,10 @@ RUN apt-get update && apt-get install -y \
       python3-pip && \
     rm -rf /var/lib/apt/lists/*
 
+RUN pip3 install RPi.GPIO smbus
 
 RUN mkdir -p /robot_ws/src
 COPY ./src /robot_ws/src
-
-RUN pip3 install RPi.GPIO
 
 RUN . /opt/ros/${ROS_DISTRO}/setup.sh && \
     cd /robot_ws && \

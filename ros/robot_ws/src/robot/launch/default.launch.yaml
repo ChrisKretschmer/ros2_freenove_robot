@@ -7,13 +7,25 @@ launch:
     pkg: "robot"
     exec: "ultrasonic"
     name: "ultrasonic"
-    namespace: "ultrasonic"
+    namespace: "robot"
+
+- node:
+    pkg: "robot"
+    exec: "battery"
+    name: "battery"
+    namespace: "robot"
+
+- node:
+    pkg: "robot"
+    exec: "motor"
+    name: "motor"
+    namespace: "robot"
 
 - node:
     pkg: "v4l2_camera"
     exec: "v4l2_camera_node"
     name: "camera"
-    namespace: "camera"
+    namespace: "robot"
     param:
     -
       name: "video_device"

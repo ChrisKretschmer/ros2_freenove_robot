@@ -22,6 +22,8 @@ setup(
     entry_points={
         'console_scripts': [
             'ultrasonic = robot.ultrasonic:main',
+            'battery = robot.battery:main',
+            'motor = robot.motor:main',
         ],
     },
 )
