@@ -3,9 +3,7 @@ services:
         build: ./ros/robot_ws
         restart: always
         privileged: true
-        ports:
-            - "9090:9090/udp"
-            - "9090:9090/tcp"
+        network_mode: host
         deploy:
             resources:
                 limits:
@@ -19,3 +17,4 @@ services:
         image: ghcr.io/foxglove/studio:latest
         ports:
             - "8080:8080"
+        restart: always
