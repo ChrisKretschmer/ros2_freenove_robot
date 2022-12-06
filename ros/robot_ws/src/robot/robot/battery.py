@@ -43,7 +43,7 @@ class Battery(Node):
     else:
       msg.present = False
     
-    self.get_logger().info("sent " + str(msg.voltage))
+    #self.get_logger().info("sent " + str(msg.voltage))
     self.publisher_.publish(msg)
     
   def get_voltage(self):
